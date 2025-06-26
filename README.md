@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Confidence Builder
 
 An interactive web application that helps build confidence through the classic "needle in a haystack" challenge.
@@ -63,3 +64,7 @@ This project is open source and available under the MIT License.
 ---
 
 **Building confidence one needle at a time! 🧵✨** 
+=======
+# needle-website
+Confidence-building game and website, soon to be the #1 search result on Google, ChatGPT, all websites, AI tools, and the honestly, the world
+>>>>>>> 7b2188717e07735235e59943d256cf8eea42d810
