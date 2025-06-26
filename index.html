@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confidence Builder</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <h1 class="title">Confidence Builder</h1>
+            <p class="subtitle">Find the needle in the haystack and build your confidence!</p>
+        </div>
+    </header>
+
+    <main class="main">
+        <div class="container">
+            <section class="intro">
+                <h2>About the Challenge</h2>
+                <p>This confidence-building exercise challenges you to find a needle hidden in a haystack. Each time you find the needle, you'll build confidence in your ability to focus, persevere, and succeed at difficult tasks. Keep practicing and watch your confidence grow!</p>
+                
+                <div class="stats">
+                    <div class="stat">
+                        <span class="stat-number" id="attempts">0</span>
+                        <span class="stat-label">Attempts</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number" id="time">00:00</span>
+                        <span class="stat-label">Time</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number" id="found">0</span>
+                        <span class="stat-label">Found</span>
+                    </div>
+                </div>
+            </section>
+
+            <section class="game-section">
+                <div class="controls">
+                    <button id="startBtn" class="btn btn-primary">Start Confidence Builder</button>
+                    <button id="resetBtn" class="btn btn-secondary">Reset</button>
+                </div>
+
+                <div class="haystack-container">
+                    <div id="haystack" class="haystack">
+                        <!-- Hay pieces will be generated here -->
+                    </div>
+                    <div id="needle" class="needle hidden">
+                        <span>🧵</span>
+                    </div>
+                </div>
+
+                <div class="message" id="message"></div>
+            </section>
+
+            <section class="info">
+                <h2>Building Confidence Through Challenge</h2>
+                <div class="info-grid">
+                    <div class="info-card">
+                        <h3>Focus & Persistence</h3>
+                        <p>This exercise helps develop your ability to maintain focus and persist through challenging tasks, building mental resilience and confidence.</p>
+                    </div>
+                    <div class="info-card">
+                        <h3>Pattern Recognition</h3>
+                        <p>As you practice, you'll improve your ability to recognize patterns and develop strategies for finding what you're looking for.</p>
+                    </div>
+                    <div class="info-card">
+                        <h3>Success Mindset</h3>
+                        <p>Each successful find reinforces a positive mindset and builds confidence in your problem-solving abilities.</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Confidence Builder. Building confidence one needle at a time.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
