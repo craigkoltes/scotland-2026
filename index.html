@@ -3,36 +3,225 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Project</title>
+    <title>Scotland Family Adventure 2026</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
 <body>
-    <header>
-        <h1>Welcome to My Project</h1>
-        <p>A simple starter template</p>
+    <header class="hero">
+        <div class="hero-content">
+            <h1>Scotland Family Adventure</h1>
+            <p class="hero-subtitle">May 20-31, 2026</p>
+            <p class="hero-description">Exploring the Highlands, Islands, and Historic Cities</p>
+        </div>
+        <div class="hero-overlay"></div>
     </header>
 
+    <nav class="main-nav">
+        <div class="nav-container">
+            <div class="nav-logo">🏴󠁧󠁢󠁳󠁣󠁴󠁿 Scotland 2026</div>
+            <ul class="nav-links">
+                <li><a href="#map">Map</a></li>
+                <li><a href="#timeline">Timeline</a></li>
+                <li><a href="#destinations">Destinations</a></li>
+                <li><a href="#gallery">Gallery</a></li>
+            </ul>
+        </div>
+    </nav>
+
     <main>
-        <section>
-            <h2>About</h2>
-            <p>This is a basic starter template for web projects.</p>
+        <section id="map" class="map-section">
+            <div class="container">
+                <h2>Our Journey Map</h2>
+                <p>Click on the markers to see details about each destination</p>
+                <div id="scotland-map"></div>
+            </div>
         </section>
 
-        <section>
-            <h2>Features</h2>
-            <ul>
-                <li>Clean HTML structure</li>
-                <li>Basic CSS styling</li>
-                <li>Simple JavaScript functionality</li>
-                <li>Responsive design</li>
-            </ul>
+        <section id="timeline" class="timeline-section">
+            <div class="container">
+                <h2>Trip Timeline</h2>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-date">May 20</div>
+                        <div class="timeline-content">
+                            <h3>Arrival Day</h3>
+                            <p>Travel to Scotland</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">May 21-24</div>
+                        <div class="timeline-content">
+                            <h3>Edinburgh</h3>
+                            <p>3 nights in Scotland's historic capital</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item day-trip">
+                        <div class="timeline-date">May 24</div>
+                        <div class="timeline-content">
+                            <h3>St Andrews Golf Course</h3>
+                            <p>Day trip to the home of golf</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">May 24-26</div>
+                        <div class="timeline-content">
+                            <h3>Inverness</h3>
+                            <p>2 nights in the Highland capital</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">May 26-29</div>
+                        <div class="timeline-content">
+                            <h3>Isle of Skye</h3>
+                            <p>3 nights exploring the magical island</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">May 29-30</div>
+                        <div class="timeline-content">
+                            <h3>Oban</h3>
+                            <p>1 night in the seafood capital</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item day-trip">
+                        <div class="timeline-date">May 30</div>
+                        <div class="timeline-content">
+                            <h3>Kilmarnock - Dean Castle (Boyd Family)</h3>
+                            <p>Day trip to visit historic castle</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">May 30</div>
+                        <div class="timeline-content">
+                            <h3>Edinburgh</h3>
+                            <p>1 night before departure</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">May 31</div>
+                        <div class="timeline-content">
+                            <h3>Fly Home</h3>
+                            <p>Departure from Scotland</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="destinations" class="destinations-section">
+            <div class="container">
+                <h2>Our Destinations</h2>
+                <div class="destinations-grid">
+                    <div class="destination-card" data-location="edinburgh">
+                        <div class="card-image edinburgh-bg"></div>
+                        <div class="card-content">
+                            <h3>Edinburgh</h3>
+                            <p class="dates">May 21-24 (3 nights) + May 30 (1 night)</p>
+                            <p>Scotland's historic capital with its iconic castle, Royal Mile, and rich cultural heritage.</p>
+                            <div class="highlights">
+                                <span class="highlight">🏰 Edinburgh Castle</span>
+                                <span class="highlight">👑 Royal Mile</span>
+                                <span class="highlight">🏛️ Holyrood Palace</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="destination-card" data-location="inverness">
+                        <div class="card-image inverness-bg"></div>
+                        <div class="card-content">
+                            <h3>Inverness</h3>
+                            <p class="dates">May 24-26 (2 nights)</p>
+                            <p>The Highland capital, gateway to Loch Ness and the stunning Scottish Highlands.</p>
+                            <div class="highlights">
+                                <span class="highlight">🏔️ Highlands</span>
+                                <span class="highlight">🦕 Loch Ness</span>
+                                <span class="highlight">🏰 Culloden Battlefield</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="destination-card" data-location="skye">
+                        <div class="card-image skye-bg"></div>
+                        <div class="card-content">
+                            <h3>Isle of Skye</h3>
+                            <p class="dates">May 26-29 (3 nights)</p>
+                            <p>Magical island with dramatic landscapes, fairy pools, and the iconic Old Man of Storr.</p>
+                            <div class="highlights">
+                                <span class="highlight">🧚 Fairy Pools</span>
+                                <span class="highlight">👴 Old Man of Storr</span>
+                                <span class="highlight">🏔️ Quiraing</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="destination-card" data-location="oban">
+                        <div class="card-image oban-bg"></div>
+                        <div class="card-content">
+                            <h3>Oban</h3>
+                            <p class="dates">May 29-30 (1 night)</p>
+                            <p>Seafood capital of Scotland with stunning coastal views and gateway to the islands.</p>
+                            <div class="highlights">
+                                <span class="highlight">🦞 Seafood</span>
+                                <span class="highlight">🏝️ Islands</span>
+                                <span class="highlight">🌊 Coastal Views</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="destination-card" data-location="st-andrews">
+                        <div class="card-image st-andrews-bg"></div>
+                        <div class="card-content">
+                            <h3>St Andrews</h3>
+                            <p class="dates">Day Trip</p>
+                            <p>Historic university town and the home of golf with beautiful coastal scenery.</p>
+                            <div class="highlights">
+                                <span class="highlight">⛳ Golf</span>
+                                <span class="highlight">🎓 University</span>
+                                <span class="highlight">🏖️ Beaches</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="destination-card" data-location="dean-castle">
+                        <div class="card-image dean-castle-bg"></div>
+                        <div class="card-content">
+                            <h3>Kilmarnock - Dean Castle (Boyd Family)</h3>
+                            <p class="dates">May 30 (Day Trip)</p>
+                            <p>Historic castle and country park in Kilmarnock with beautiful gardens and rich history.</p>
+                            <div class="highlights">
+                                <span class="highlight">🏰 Castle</span>
+                                <span class="highlight">🌳 Country Park</span>
+                                <span class="highlight">🏛️ History</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="gallery" class="gallery-section">
+            <div class="container">
+                <h2>Photo Gallery</h2>
+                <p>Photos from our family adventure will be added here</p>
+                <div class="gallery-grid">
+                    <div class="gallery-placeholder">
+                        <div class="placeholder-icon">📸</div>
+                        <p>Photos coming soon!</p>
+                    </div>
+                </div>
+            </div>
         </section>
     </main>
 
     <footer>
-        <p>&copy; 2024 My Project</p>
+        <div class="container">
+            <p>&copy; 2026 Scotland Family Adventure</p>
+        </div>
     </footer>
 
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
