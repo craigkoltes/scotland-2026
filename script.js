@@ -168,8 +168,10 @@ function initializeNavigation() {
     navLinks.forEach(link => {
         link.addEventListener('click', function(e) {
             const href = this.getAttribute('href');
+            console.log('Nav link clicked:', href);
             if (href && href.startsWith('#')) {
                 e.preventDefault();
+                console.log('Prevented default for anchor link:', href);
                 const targetSection = document.querySelector(href);
                 if (targetSection) {
                     const navHeight = document.querySelector('.main-nav').offsetHeight;
@@ -179,8 +181,9 @@ function initializeNavigation() {
                         behavior: 'smooth'
                     });
                 }
+            } else {
+                console.log('Allowing default navigation for:', href);
             }
-            // Otherwise, let the browser handle the navigation
         });
     });
 
