@@ -47,7 +47,7 @@ h3 {
 .hero {
     height: 100vh;
     background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)),
-                url('old-man-of-storr.png');
+                url('./old-man-of-storr.png');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
@@ -265,27 +265,27 @@ h3 {
 }
 
 .edinburgh-bg {
-    background-image: url('edinburgh-castle.png');
+    background-image: url('./edinburgh-castle.png');
 }
 
 .inverness-bg {
-    background-image: url('inverness-bridge.jpeg');
+    background-image: url('./inverness-bridge.jpeg');
 }
 
 .skye-bg {
-    background-image: url('cows.jpg');
+    background-image: url('./cows.jpg');
 }
 
 .oban-bg {
-    background-image: url('oban.jpg');
+    background-image: url('./oban.jpg');
 }
 
 .st-andrews-bg {
-    background-image: url('st-andrews.jpg');
+    background-image: url('./st-andrews.jpg');
 }
 
 .dean-castle-bg {
-    background-image: url('dean-castle-kilmarnock.jpg');
+    background-image: url('./dean-castle-kilmarnock.jpg');
 }
 
 .card-content {
