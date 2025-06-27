@@ -738,43 +738,15 @@ footer {
     }
 }
 
+/* Remove problematic display rules for timeline table on mobile */
 @media (max-width: 600px) {
-    .timeline-table-wrapper {
-        margin-top: 1rem;
-        width: 100%;
-        overflow-x: auto;
-    }
-    .timeline-table {
-        width: 100%;
-        font-size: 0.9rem;
-        table-layout: auto;
-        display: table;
-    }
     .timeline-table th, .timeline-table td {
-        padding: 0.4rem 0.4rem;
-        font-size: 0.9rem;
-        text-align: left;
-        white-space: normal;
-        word-break: break-word;
-    }
-    .timeline-table th {
-        background: #667eea;
-        color: #fff;
-        font-weight: 700;
-        font-size: 1rem;
-        border-radius: 0;
-    }
-    .timeline-table th:first-child, .timeline-table td:first-child {
-        min-width: 80px;
-        font-size: 0.9rem;
-        white-space: normal;
-        word-break: break-word;
+        /* display: block; */
+        /* display: table-cell; */
     }
 }
 
-/* No currency converter styles needed */
-
-/* Force standard table layout for timeline table on all screens */
+/* Force standard table layout for timeline table on all screens (keep this at the very end) */
 .timeline-table,
 .timeline-table thead,
 .timeline-table tbody,
@@ -783,3 +755,5 @@ footer {
 .timeline-table td {
   display: revert !important;
 }
+
+/* No currency converter styles needed */
