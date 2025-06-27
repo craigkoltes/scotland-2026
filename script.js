@@ -1,250 +1,275 @@
-// Game state
-let gameState = {
-    isActive: false,
-    attempts: 0,
-    found: 0,
-    startTime: null,
-    timer: null,
-    needlePosition: { x: 0, y: 0 },
-    hayPieces: []
-};
-
-// DOM elements
-const startBtn = document.getElementById('startBtn');
-const resetBtn = document.getElementById('resetBtn');
-const haystack = document.getElementById('haystack');
-const needle = document.getElementById('needle');
-const message = document.getElementById('message');
-const attemptsDisplay = document.getElementById('attempts');
-const timeDisplay = document.getElementById('time');
-const foundDisplay = document.getElementById('found');
-
-// Initialize the game
-function init() {
-    startBtn.addEventListener('click', startGame);
-    resetBtn.addEventListener('click', resetGame);
-    haystack.addEventListener('click', handleHaystackClick);
-    needle.addEventListener('click', handleNeedleClick);
-    
-    // Generate initial hay pieces
-    generateHayPieces();
-    
-    // Update displays
-    updateDisplays();
-}
-
-// Generate hay pieces
-function generateHayPieces() {
-    haystack.innerHTML = '';
-    gameState.hayPieces = [];
-    
-    const numPieces = 200; // Number of hay pieces
-    
-    for (let i = 0; i < numPieces; i++) {
-        const hayPiece = document.createElement('div');
-        hayPiece.className = 'hay-piece';
+// Confidence Builder Game
+class ConfidenceBuilder {
+    constructor() {
+        this.attempts = 0;
+        this.found = 0;
+        this.startTime = null;
+        this.timer = null;
+        this.gameActive = false;
+        this.needlePosition = { x: 0, y: 0 };
         
-        // Random position within the haystack
-        const x = Math.random() * (haystack.offsetWidth - 4);
-        const y = Math.random() * (haystack.offsetHeight - 20);
+        // DOM elements
+        this.attemptsElement = document.getElementById('attempts');
+        this.timeElement = document.getElementById('time');
+        this.foundElement = document.getElementById('found');
+        this.startBtn = document.getElementById('startBtn');
+        this.resetBtn = document.getElementById('resetBtn');
+        this.messageElement = document.getElementById('message');
+        this.haystackElement = document.getElementById('haystack');
+        this.needleElement = document.getElementById('needle');
         
-        hayPiece.style.left = x + 'px';
-        hayPiece.style.top = y + 'px';
-        
-        // Random rotation
-        const rotation = Math.random() * 360;
-        hayPiece.style.transform = `rotate(${rotation}deg)`;
-        
-        haystack.appendChild(hayPiece);
-        gameState.hayPieces.push({ element: hayPiece, x, y });
+        this.initializeEventListeners();
+        this.updateDisplay();
     }
-}
-
-// Start the game
-function startGame() {
-    if (gameState.isActive) return;
     
-    gameState.isActive = true;
-    gameState.startTime = Date.now();
-    gameState.attempts = 0;
-    gameState.found = 0;
+    initializeEventListeners() {
+        this.startBtn.addEventListener('click', () => this.startGame());
+        this.resetBtn.addEventListener('click', () => this.resetGame());
+        this.needleElement.addEventListener('click', () => this.findNeedle());
+        this.haystackElement.addEventListener('click', (e) => this.handleHaystackClick(e));
+    }
     
-    // Hide the needle initially
-    needle.classList.add('hidden');
-    
-    // Position the needle randomly
-    positionNeedle();
-    
-    // Start timer
-    startTimer();
-    
-    // Update UI
-    startBtn.textContent = 'Confidence Builder Active';
-    startBtn.disabled = true;
-    message.textContent = 'Click anywhere in the haystack to find the needle and build your confidence!';
-    message.className = 'message';
-    
-    updateDisplays();
-}
-
-// Position the needle randomly
-function positionNeedle() {
-    const container = haystack.getBoundingClientRect();
-    const needleSize = 24; // Approximate needle size
-    
-    gameState.needlePosition = {
-        x: Math.random() * (container.width - needleSize),
-        y: Math.random() * (container.height - needleSize)
-    };
-    
-    needle.style.left = gameState.needlePosition.x + 'px';
-    needle.style.top = gameState.needlePosition.y + 'px';
-    needle.classList.remove('hidden');
-}
-
-// Handle direct needle clicks
-function handleNeedleClick(event) {
-    if (!gameState.isActive) return;
-    
-    event.stopPropagation(); // Prevent the haystack click handler from firing
-    
-    // Found the needle!
-    gameState.found++;
-    gameState.attempts++;
-    needle.classList.add('found');
-    
-    message.textContent = "You found me! Your confidence is growing! 🎉";
-    message.className = 'message success';
-    
-    // Reposition needle for next round
-    setTimeout(() => {
-        positionNeedle();
-        needle.classList.remove('found');
-        message.textContent = 'Excellent! Keep building your confidence - find the next needle!';
-    }, 1500);
-    
-    updateDisplays();
-}
-
-// Handle haystack clicks
-function handleHaystackClick(event) {
-    if (!gameState.isActive) return;
-    
-    const rect = haystack.getBoundingClientRect();
-    const clickX = event.clientX - rect.left;
-    const clickY = event.clientY - rect.top;
-    
-    gameState.attempts++;
-    
-    // Check if click is near the needle
-    const distance = Math.sqrt(
-        Math.pow(clickX - gameState.needlePosition.x, 2) + 
-        Math.pow(clickY - gameState.needlePosition.y, 2)
-    );
-    
-    if (distance < 50) { // Increased radius from 30px to 50px for easier finding
-        // Found the needle!
-        gameState.found++;
-        needle.classList.add('found');
+    startGame() {
+        if (this.gameActive) return;
         
-        message.textContent = "You found me! Your confidence is growing! 🎉";
-        message.className = 'message success';
+        this.gameActive = true;
+        this.startTime = Date.now();
+        this.startBtn.textContent = 'Game Active';
+        this.startBtn.disabled = true;
+        this.messageElement.textContent = 'Find the needle in the haystack!';
+        this.messageElement.className = 'message';
         
-        // Reposition needle for next round
+        this.generateHaystack();
+        this.hideNeedle();
+        this.startTimer();
+        
+        // Add some delay before showing the needle
         setTimeout(() => {
-            positionNeedle();
-            needle.classList.remove('found');
-            message.textContent = 'Excellent! Keep building your confidence - find the next needle!';
-        }, 1500);
-        
-    } else {
-        // Missed
-        message.textContent = `Keep searching! Every attempt builds your confidence. Attempts: ${gameState.attempts}`;
-        message.className = 'message error';
-        
-        // Add a visual effect for the miss
-        const missEffect = document.createElement('div');
-        missEffect.style.position = 'absolute';
-        missEffect.style.left = (clickX - 10) + 'px';
-        missEffect.style.top = (clickY - 10) + 'px';
-        missEffect.style.width = '20px';
-        missEffect.style.height = '20px';
-        missEffect.style.border = '2px solid #e74c3c';
-        missEffect.style.borderRadius = '50%';
-        missEffect.style.pointerEvents = 'none';
-        missEffect.style.animation = 'fadeOut 1s ease-out forwards';
-        
-        haystack.appendChild(missEffect);
-        
-        setTimeout(() => {
-            haystack.removeChild(missEffect);
+            this.showNeedle();
         }, 1000);
     }
     
-    updateDisplays();
-}
-
-// Start the timer
-function startTimer() {
-    gameState.timer = setInterval(() => {
-        if (gameState.startTime) {
-            const elapsed = Date.now() - gameState.startTime;
-            const minutes = Math.floor(elapsed / 60000);
-            const seconds = Math.floor((elapsed % 60000) / 1000);
-            timeDisplay.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+    resetGame() {
+        this.gameActive = false;
+        this.attempts = 0;
+        this.found = 0;
+        this.startTime = null;
+        this.stopTimer();
+        
+        this.startBtn.textContent = 'Start Confidence Builder';
+        this.startBtn.disabled = false;
+        this.messageElement.textContent = '';
+        this.messageElement.className = 'message';
+        
+        this.hideNeedle();
+        this.clearHaystack();
+        this.updateDisplay();
+    }
+    
+    generateHaystack() {
+        this.clearHaystack();
+        
+        // Generate random hay pieces
+        const hayCount = 150 + Math.floor(Math.random() * 100);
+        
+        for (let i = 0; i < hayCount; i++) {
+            const hayPiece = document.createElement('div');
+            hayPiece.className = 'hay-piece';
+            hayPiece.style.left = Math.random() * 100 + '%';
+            hayPiece.style.top = Math.random() * 100 + '%';
+            hayPiece.style.transform = `rotate(${Math.random() * 360}deg)`;
+            hayPiece.style.animationDelay = Math.random() * 3 + 's';
+            
+            this.haystackElement.appendChild(hayPiece);
         }
-    }, 1000);
-}
-
-// Reset the game
-function resetGame() {
-    gameState.isActive = false;
-    gameState.attempts = 0;
-    gameState.found = 0;
-    gameState.startTime = null;
-    
-    if (gameState.timer) {
-        clearInterval(gameState.timer);
-        gameState.timer = null;
     }
     
-    needle.classList.add('hidden');
-    needle.classList.remove('found');
+    clearHaystack() {
+        this.haystackElement.innerHTML = '';
+    }
     
-    startBtn.textContent = 'Start Confidence Builder';
-    startBtn.disabled = false;
-    message.textContent = '';
-    message.className = 'message';
+    showNeedle() {
+        if (!this.gameActive) return;
+        
+        const container = this.haystackElement.getBoundingClientRect();
+        const maxX = container.width - 60;
+        const maxY = container.height - 60;
+        
+        this.needlePosition = {
+            x: Math.random() * maxX,
+            y: Math.random() * maxY
+        };
+        
+        this.needleElement.style.left = this.needlePosition.x + 'px';
+        this.needleElement.style.top = this.needlePosition.y + 'px';
+        this.needleElement.classList.remove('hidden');
+    }
     
-    timeDisplay.textContent = '00:00';
+    hideNeedle() {
+        this.needleElement.classList.add('hidden');
+    }
     
-    updateDisplays();
+    findNeedle() {
+        if (!this.gameActive) return;
+        
+        this.found++;
+        this.gameActive = false;
+        this.stopTimer();
+        
+        const timeElapsed = this.getTimeElapsed();
+        const timeString = this.formatTime(timeElapsed);
+        
+        this.needleElement.classList.add('found');
+        this.messageElement.textContent = `🎉 Congratulations! You found the needle in ${timeString}! Your confidence is growing!`;
+        this.messageElement.className = 'message success';
+        
+        this.startBtn.textContent = 'Start Confidence Builder';
+        this.startBtn.disabled = false;
+        
+        this.updateDisplay();
+        
+        // Reset needle after a delay
+        setTimeout(() => {
+            this.needleElement.classList.remove('found');
+            this.hideNeedle();
+        }, 2000);
+    }
+    
+    handleHaystackClick(e) {
+        if (!this.gameActive) return;
+        
+        this.attempts++;
+        this.updateDisplay();
+        
+        // Check if click is near the needle
+        const clickX = e.clientX - this.haystackElement.getBoundingClientRect().left;
+        const clickY = e.clientY - this.haystackElement.getBoundingClientRect().top;
+        
+        const distance = Math.sqrt(
+            Math.pow(clickX - this.needlePosition.x, 2) + 
+            Math.pow(clickY - this.needlePosition.y, 2)
+        );
+        
+        if (distance > 50) {
+            this.messageElement.textContent = 'Keep looking! The needle is somewhere in the haystack.';
+            this.messageElement.className = 'message error';
+            
+            // Clear message after 2 seconds
+            setTimeout(() => {
+                if (this.gameActive) {
+                    this.messageElement.textContent = 'Find the needle in the haystack!';
+                    this.messageElement.className = 'message';
+                }
+            }, 2000);
+        }
+    }
+    
+    startTimer() {
+        this.timer = setInterval(() => {
+            this.updateDisplay();
+        }, 1000);
+    }
+    
+    stopTimer() {
+        if (this.timer) {
+            clearInterval(this.timer);
+            this.timer = null;
+        }
+    }
+    
+    getTimeElapsed() {
+        if (!this.startTime) return 0;
+        return Date.now() - this.startTime;
+    }
+    
+    formatTime(milliseconds) {
+        const seconds = Math.floor(milliseconds / 1000);
+        const minutes = Math.floor(seconds / 60);
+        const remainingSeconds = seconds % 60;
+        
+        if (minutes > 0) {
+            return `${minutes}m ${remainingSeconds}s`;
+        } else {
+            return `${remainingSeconds}s`;
+        }
+    }
+    
+    updateDisplay() {
+        this.attemptsElement.textContent = this.attempts;
+        this.foundElement.textContent = this.found;
+        
+        if (this.gameActive && this.startTime) {
+            const timeElapsed = this.getTimeElapsed();
+            this.timeElement.textContent = this.formatTime(timeElapsed);
+        } else {
+            this.timeElement.textContent = '00:00';
+        }
+    }
 }
 
-// Update all displays
-function updateDisplays() {
-    attemptsDisplay.textContent = gameState.attempts;
-    foundDisplay.textContent = gameState.found;
-}
+// Initialize the game when the page loads
+document.addEventListener('DOMContentLoaded', () => {
+    new ConfidenceBuilder();
+});
 
-// Add CSS animation for miss effect
-const style = document.createElement('style');
-style.textContent = `
-    @keyframes fadeOut {
-        0% { opacity: 1; transform: scale(1); }
-        100% { opacity: 0; transform: scale(1.5); }
-    }
-`;
-document.head.appendChild(style);
-
-// Initialize when DOM is loaded
-document.addEventListener('DOMContentLoaded', init);
-
-// Handle window resize
-window.addEventListener('resize', () => {
-    if (gameState.isActive) {
-        // Regenerate hay pieces and reposition needle on resize
-        generateHayPieces();
-        positionNeedle();
-    }
+// Add some additional interactive features
+document.addEventListener('DOMContentLoaded', () => {
+    // Add hover effects for better user experience
+    const haystackContainer = document.querySelector('.haystack-container');
+    
+    haystackContainer.addEventListener('mouseenter', () => {
+        if (document.querySelector('.needle:not(.hidden)')) {
+            haystackContainer.style.cursor = 'pointer';
+        }
+    });
+    
+    haystackContainer.addEventListener('mouseleave', () => {
+        haystackContainer.style.cursor = 'crosshair';
+    });
+    
+    // Add keyboard shortcuts
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            const startBtn = document.getElementById('startBtn');
+            if (!startBtn.disabled) {
+                startBtn.click();
+            }
+        }
+        
+        if (e.key === 'r' || e.key === 'R') {
+            const resetBtn = document.getElementById('resetBtn');
+            resetBtn.click();
+        }
+    });
+    
+    // Add some motivational messages
+    const motivationalMessages = [
+        "Every attempt builds your confidence!",
+        "You're getting closer with each try!",
+        "Focus and persistence lead to success!",
+        "Your determination is impressive!",
+        "Keep going - you've got this!",
+        "Each challenge makes you stronger!",
+        "Success is just around the corner!",
+        "Your confidence is growing with every search!"
+    ];
+    
+    // Show random motivational message every 10 seconds during active game
+    setInterval(() => {
+        const gameActive = document.querySelector('#startBtn').disabled;
+        const messageElement = document.getElementById('message');
+        
+        if (gameActive && messageElement.textContent.includes('Find the needle')) {
+            const randomMessage = motivationalMessages[Math.floor(Math.random() * motivationalMessages.length)];
+            messageElement.textContent = randomMessage;
+            
+            // Reset to original message after 3 seconds
+            setTimeout(() => {
+                if (gameActive) {
+                    messageElement.textContent = 'Find the needle in the haystack!';
+                }
+            }, 3000);
+        }
+    }, 10000);
 });
