@@ -773,3 +773,13 @@ footer {
 }
 
 /* No currency converter styles needed */
+
+/* Force standard table layout for timeline table on all screens */
+.timeline-table,
+.timeline-table thead,
+.timeline-table tbody,
+.timeline-table tr,
+.timeline-table th,
+.timeline-table td {
+  display: revert !important;
+}
