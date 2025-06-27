@@ -1,11 +1,10 @@
-<<<<<<< HEAD
-# Confidence Builder
+# Scotland Trip 2026
 
-An interactive web application that helps build confidence through the classic "needle in a haystack" challenge.
+An interactive web application that helps build confidence through the classic "needle in a haystack" challenge, created for the Scotland 2026 family trip project.
 
 ## 🎯 About
 
-Confidence Builder is a fun, interactive exercise that challenges users to find a needle hidden in a digital haystack. Each successful find reinforces positive problem-solving skills and builds confidence through focused practice.
+Scotland Trip 2026 is a fun, interactive exercise that challenges users to find a needle hidden in a digital haystack. Each successful find reinforces positive problem-solving skills and builds confidence through focused practice. This project was created as part of the Scotland 2026 family trip planning and preparation.
 
 ## ✨ Features
 
@@ -17,10 +16,10 @@ Confidence Builder is a fun, interactive exercise that challenges users to find 
 
 ## 🎮 How to Play
 
-1. Click "Start Confidence Builder" to begin
+1. Click "Start Scotland Trip 2026" to begin
 2. Look for the needle (🧵) hidden in the haystack
 3. Click anywhere in the haystack area to search
-4. When you find the needle, it will show "You found me! Your confidence is growing! 🎉"
+4. When you find the needle, it will show "You found me! Your confidence is growing for Scotland 2026! 🏴󠁧󠁢󠁳󠁣󠁴󠁿"
 5. Keep playing to build more confidence!
 
 ## 🛠️ Technologies Used
@@ -32,7 +31,7 @@ Confidence Builder is a fun, interactive exercise that challenges users to find 
 
 ## 🚀 Live Demo
 
-Visit the live website: [Confidence Builder](https://craigkoltes.github.io/needle-website/)
+Visit the live website: [Scotland Trip 2026](https://craigkoltes.github.io/scotland-2026/)
 
 ## 📱 Responsive Design
 
@@ -55,7 +54,11 @@ To run this project locally:
 
 1. Clone the repository
 2. Open `index.html` in your web browser
-3. Start building confidence!
+3. Start building confidence for your Scotland adventure!
+
+## 🏴󠁧󠁢󠁳󠁣󠁴󠁿 Scotland 2026
+
+This confidence builder is part of the Scotland 2026 family trip project, designed to help build confidence and problem-solving skills in preparation for the adventure ahead.
 
 ## 📄 License
 
@@ -63,8 +66,4 @@ This project is open source and available under the MIT License.
 
 ---
 
-**Building confidence one needle at a time! 🧵✨** 
-=======
-# needle-website
-Confidence-building game and website, soon to be the #1 search result on Google, ChatGPT, all websites, AI tools, and the honestly, the world
->>>>>>> 7b2188717e07735235e59943d256cf8eea42d810
+**Building confidence one needle at a time! 🧵✨ Scotland 2026 awaits! 🏴󠁧󠁢󠁳󠁣󠁴󠁿**

@@ -56,7 +56,7 @@ class ConfidenceBuilder {
         this.startTime = null;
         this.stopTimer();
         
-        this.startBtn.textContent = 'Start Confidence Builder';
+        this.startBtn.textContent = 'Start Scotland Trip 2026';
         this.startBtn.disabled = false;
         this.messageElement.textContent = '';
         this.messageElement.className = 'message';
@@ -120,10 +120,10 @@ class ConfidenceBuilder {
         const timeString = this.formatTime(timeElapsed);
         
         this.needleElement.classList.add('found');
-        this.messageElement.textContent = `🎉 Congratulations! You found the needle in ${timeString}! Your confidence is growing!`;
+        this.messageElement.textContent = `🎉 Congratulations! You found the needle in ${timeString}! Your confidence is growing for Scotland 2026! 🏴󠁧󠁢󠁳󠁣󠁴󠁿`;
         this.messageElement.className = 'message success';
         
-        this.startBtn.textContent = 'Start Confidence Builder';
+        this.startBtn.textContent = 'Start Scotland Trip 2026';
         this.startBtn.disabled = false;
         
         this.updateDisplay();
@@ -245,14 +245,18 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Add some motivational messages
     const motivationalMessages = [
-        "Every attempt builds your confidence!",
+        "Every attempt builds your confidence for Scotland!",
         "You're getting closer with each try!",
         "Focus and persistence lead to success!",
         "Your determination is impressive!",
         "Keep going - you've got this!",
         "Each challenge makes you stronger!",
         "Success is just around the corner!",
-        "Your confidence is growing with every search!"
+        "Your confidence is growing with every search!",
+        "Scotland 2026 awaits your adventurous spirit! 🏴󠁧󠁢󠁳󠁣󠁴󠁿",
+        "Building resilience for your Highland adventures!",
+        "Every find brings you closer to Scotland!",
+        "Your problem-solving skills will serve you well in Scotland!"
     ];
     
     // Show random motivational message every 10 seconds during active game
