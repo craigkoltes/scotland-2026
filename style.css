@@ -713,8 +713,9 @@ footer {
     vertical-align: top;
 }
 .timeline-table th:first-child, .timeline-table td:first-child {
-    min-width: 120px;
-    white-space: nowrap;
+    min-width: 160px;
+    font-size: 1rem;
+    white-space: normal;
 }
 @media (max-width: 700px) {
     .timeline-table {
@@ -727,9 +728,9 @@ footer {
         padding: 0.5rem 0.5rem;
     }
     .timeline-table th:first-child, .timeline-table td:first-child {
-        font-size: 0.9rem;
-        min-width: 120px;
-        white-space: nowrap;
+        min-width: 160px;
+        font-size: 1rem;
+        white-space: normal;
     }
     .timeline-table-wrapper {
         overflow-x: auto;
