@@ -1,5 +1,5 @@
 @echo off
-echo Setting up Confidence Builder for GitHub deployment...
+echo Setting up project for GitHub deployment...
 
 echo.
 echo Step 1: Initializing Git repository...
@@ -11,11 +11,14 @@ echo Step 2: Adding all files...
 
 echo.
 echo Step 3: Making initial commit...
-"C:\Program Files\Git\bin\git.exe" commit -m "Initial commit: Confidence Builder website"
+"C:\Program Files\Git\bin\git.exe" commit -m "Initial commit: My Project"
 
 echo.
 echo Step 4: Adding remote repository...
-"C:\Program Files\Git\bin\git.exe" remote add origin https://github.com/craigkoltes/needle-website.git
+echo Please enter your GitHub repository URL (e.g., https://github.com/username/project-name.git):
+set /p repo_url=
+
+"C:\Program Files\Git\bin\git.exe" remote add origin %repo_url%
 
 echo.
 echo Step 5: Pushing to GitHub...
@@ -23,10 +26,8 @@ echo Step 5: Pushing to GitHub...
 
 echo.
 echo Deployment complete!
-echo Your website should be available at: https://craigkoltes.github.io/needle-website/
 echo.
 echo Note: You may need to enable GitHub Pages in your repository settings.
-echo Go to: https://github.com/craigkoltes/needle-website/settings/pages
-echo Set source to "Deploy from a branch" and select "main" branch.
+echo Go to your repository settings and set source to "Deploy from a branch" and select "main" branch.
 echo.
 pause 
