@@ -738,16 +738,3 @@ footer {
 }
 
 /* No currency converter styles needed */
-
-.theme-toggle {
-    background: none;
-    border: none;
-    font-size: 1.5rem;
-    margin-left: 1rem;
-    cursor: pointer;
-    color: #2c3e50;
-    transition: color 0.3s;
-}
-body.dark-mode .theme-toggle {
-    color: #ffd700;
-}
