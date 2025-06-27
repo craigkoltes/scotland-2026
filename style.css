@@ -742,21 +742,39 @@ footer {
     .timeline-table-wrapper {
         margin-top: 1rem;
         width: 100%;
-        overflow-x: auto;
+        overflow-x: unset;
     }
     .timeline-table {
-        min-width: unset;
+        min-width: 0;
         width: 100%;
         font-size: 0.9rem;
         table-layout: auto;
+        display: block;
+    }
+    .timeline-table thead, .timeline-table tbody, .timeline-table tr {
+        display: block;
+        width: 100%;
     }
     .timeline-table th, .timeline-table td {
+        display: block;
+        width: 100%;
+        box-sizing: border-box;
         padding: 0.4rem 0.4rem;
-        font-size: 0.9rem;
+        font-size: 0.95rem;
+        text-align: left;
+        white-space: normal;
+        word-break: break-word;
+    }
+    .timeline-table th {
+        background: #667eea;
+        color: #fff;
+        font-weight: 700;
+        font-size: 1rem;
+        border-radius: 0;
     }
     .timeline-table th:first-child, .timeline-table td:first-child {
-        min-width: 80px;
-        font-size: 0.9rem;
+        min-width: 0;
+        font-size: 0.95rem;
         white-space: normal;
         word-break: break-word;
     }
