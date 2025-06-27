@@ -39,6 +39,13 @@ document.addEventListener('DOMContentLoaded', function() {
         console.error('Error initializing countdown timer:', error);
     }
     
+    try {
+        initializeHamburgerMenu();
+        console.log('Hamburger menu initialized');
+    } catch (error) {
+        console.error('Error initializing hamburger menu:', error);
+    }
+    
     console.log('Website initialization complete');
     
     // Fallback initialization after a short delay
@@ -630,3 +637,23 @@ function testCountdownTimer() {
 
 // Make the test function available globally
 window.testCountdownTimer = testCountdownTimer;
+
+// Hamburger menu functionality
+function initializeHamburgerMenu() {
+    const hamburger = document.getElementById('hamburger-menu');
+    const navLinks = document.querySelector('.nav-links');
+    if (!hamburger || !navLinks) return;
+
+    hamburger.addEventListener('click', function() {
+        navLinks.classList.toggle('open');
+        hamburger.classList.toggle('active');
+    });
+
+    // Close menu when a link is clicked
+    navLinks.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', function() {
+            navLinks.classList.remove('open');
+            hamburger.classList.remove('active');
+        });
+    });
+}
