@@ -46,6 +46,13 @@ document.addEventListener('DOMContentLoaded', function() {
         console.error('Error initializing hamburger menu:', error);
     }
     
+    try {
+        initializeThemeToggle();
+        console.log('Theme toggle initialized');
+    } catch (error) {
+        console.error('Error initializing theme toggle:', error);
+    }
+    
     console.log('Website initialization complete');
     
     // Fallback initialization after a short delay
@@ -658,5 +665,37 @@ function initializeHamburgerMenu() {
             navLinks.classList.remove('open');
             hamburger.classList.remove('active');
         });
+    });
+}
+
+// Light/Dark Mode Toggle
+function initializeThemeToggle() {
+    const toggleBtn = document.getElementById('theme-toggle');
+    const themeIcon = document.getElementById('theme-icon');
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const savedTheme = localStorage.getItem('theme');
+    const body = document.body;
+
+    function setTheme(dark) {
+        if (dark) {
+            body.classList.add('dark-mode');
+            themeIcon.textContent = '☀️';
+            localStorage.setItem('theme', 'dark');
+        } else {
+            body.classList.remove('dark-mode');
+            themeIcon.textContent = '🌙';
+            localStorage.setItem('theme', 'light');
+        }
+    }
+
+    // Set initial theme
+    if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
+        setTheme(true);
+    } else {
+        setTheme(false);
+    }
+
+    toggleBtn.addEventListener('click', () => {
+        setTheme(!body.classList.contains('dark-mode'));
     });
 }
