@@ -646,11 +646,21 @@ footer {
 }
 @media (max-width: 700px) {
     .timeline-table {
-        min-width: 0;
-        width: 100%;
+        min-width: 600px;
+        width: 600px;
+        table-layout: fixed;
         font-size: 0.95rem;
     }
     .timeline-table th, .timeline-table td {
         padding: 0.5rem 0.5rem;
+    }
+    .timeline-table th:first-child, .timeline-table td:first-child {
+        font-size: 0.9rem;
+        min-width: 120px;
+        white-space: nowrap;
+    }
+    .timeline-table-wrapper {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
     }
 }
