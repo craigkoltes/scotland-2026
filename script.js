@@ -451,13 +451,19 @@ function getMockWeatherData(location) {
     return weatherData[location] || { temp: 10, description: 'Variable', icon: '🌤️' };
 }
 
+// Convert Celsius to Fahrenheit
+function celsiusToFahrenheit(celsius) {
+    return Math.round((celsius * 9/5) + 32);
+}
+
 // Display weather data in the widget
 function displayWeatherData(widget, data) {
+    const tempF = celsiusToFahrenheit(data.temp);
     widget.innerHTML = `
         <div class="weather-content">
             <div class="weather-icon">${data.icon}</div>
             <div class="weather-info">
-                <div class="weather-temp">${data.temp}°C</div>
+                <div class="weather-temp">${tempF}°F</div>
                 <div class="weather-desc">${data.description}</div>
             </div>
         </div>
