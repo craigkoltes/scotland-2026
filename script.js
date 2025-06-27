@@ -2,11 +2,59 @@
 
 // Wait for DOM to load
 document.addEventListener('DOMContentLoaded', function() {
-    initializeMap();
-    initializeNavigation();
-    initializeCardInteractions();
-    initializeWeatherWidgets();
-    initializeCountdownTimer();
+    console.log('DOM loaded, initializing website...');
+    
+    try {
+        initializeMap();
+        console.log('Map initialized');
+    } catch (error) {
+        console.error('Error initializing map:', error);
+    }
+    
+    try {
+        initializeNavigation();
+        console.log('Navigation initialized');
+    } catch (error) {
+        console.error('Error initializing navigation:', error);
+    }
+    
+    try {
+        initializeCardInteractions();
+        console.log('Card interactions initialized');
+    } catch (error) {
+        console.error('Error initializing card interactions:', error);
+    }
+    
+    try {
+        initializeWeatherWidgets();
+        console.log('Weather widgets initialized');
+    } catch (error) {
+        console.error('Error initializing weather widgets:', error);
+    }
+    
+    try {
+        initializeCountdownTimer();
+        console.log('Countdown timer initialization attempted');
+    } catch (error) {
+        console.error('Error initializing countdown timer:', error);
+    }
+    
+    console.log('Website initialization complete');
+    
+    // Fallback initialization after a short delay
+    setTimeout(function() {
+        console.log('Running fallback initialization...');
+        try {
+            // Check if countdown is working, if not, try again
+            const daysElement = document.getElementById('days');
+            if (daysElement && daysElement.innerHTML === '--') {
+                console.log('Countdown not initialized, trying again...');
+                initializeCountdownTimer();
+            }
+        } catch (error) {
+            console.error('Error in fallback initialization:', error);
+        }
+    }, 1000);
 });
 
 // Initialize the interactive map
@@ -478,8 +526,29 @@ function showWeatherError(widget, message) {
 
 // Initialize countdown timer
 function initializeCountdownTimer() {
+    console.log('Initializing countdown timer...');
+    
+    // Check if countdown elements exist
+    const daysElement = document.getElementById('days');
+    const hoursElement = document.getElementById('hours');
+    const minutesElement = document.getElementById('minutes');
+    const secondsElement = document.getElementById('seconds');
+    
+    if (!daysElement || !hoursElement || !minutesElement || !secondsElement) {
+        console.error('Countdown elements not found:', {
+            days: !!daysElement,
+            hours: !!hoursElement,
+            minutes: !!minutesElement,
+            seconds: !!secondsElement
+        });
+        return;
+    }
+    
+    console.log('Countdown elements found, setting up timer...');
+    
     // Set the target date: May 20, 2026 at 9:00 AM (assuming arrival time)
     const targetDate = new Date('May 20, 2026 09:00:00').getTime();
+    console.log('Target date:', new Date(targetDate));
     
     // Update the countdown every second
     const countdownInterval = setInterval(function() {
@@ -489,10 +558,11 @@ function initializeCountdownTimer() {
         // If the countdown is finished
         if (distance < 0) {
             clearInterval(countdownInterval);
-            document.getElementById('days').innerHTML = '0';
-            document.getElementById('hours').innerHTML = '0';
-            document.getElementById('minutes').innerHTML = '0';
-            document.getElementById('seconds').innerHTML = '0';
+            daysElement.innerHTML = '0';
+            hoursElement.innerHTML = '0';
+            minutesElement.innerHTML = '0';
+            secondsElement.innerHTML = '0';
+            console.log('Countdown finished');
             return;
         }
         
@@ -503,10 +573,10 @@ function initializeCountdownTimer() {
         const seconds = Math.floor((distance % (1000 * 60)) / 1000);
         
         // Update the display
-        document.getElementById('days').innerHTML = days;
-        document.getElementById('hours').innerHTML = hours.toString().padStart(2, '0');
-        document.getElementById('minutes').innerHTML = minutes.toString().padStart(2, '0');
-        document.getElementById('seconds').innerHTML = seconds.toString().padStart(2, '0');
+        daysElement.innerHTML = days;
+        hoursElement.innerHTML = hours.toString().padStart(2, '0');
+        minutesElement.innerHTML = minutes.toString().padStart(2, '0');
+        secondsElement.innerHTML = seconds.toString().padStart(2, '0');
         
         // Add animation when numbers change
         animateCountdownNumber('days', days);
@@ -515,6 +585,8 @@ function initializeCountdownTimer() {
         animateCountdownNumber('seconds', seconds);
         
     }, 1000);
+    
+    console.log('Countdown timer initialized successfully');
 }
 
 // Animate countdown number changes
@@ -530,3 +602,31 @@ function animateCountdownNumber(elementId, newValue) {
         element.dataset.lastValue = newValue.toString();
     }
 }
+
+// Manual test function for countdown timer (can be called from browser console)
+function testCountdownTimer() {
+    console.log('Testing countdown timer...');
+    const daysElement = document.getElementById('days');
+    const hoursElement = document.getElementById('hours');
+    const minutesElement = document.getElementById('minutes');
+    const secondsElement = document.getElementById('seconds');
+    
+    console.log('Elements found:', {
+        days: daysElement,
+        hours: hoursElement,
+        minutes: minutesElement,
+        seconds: secondsElement
+    });
+    
+    if (daysElement) {
+        console.log('Current days value:', daysElement.innerHTML);
+        daysElement.innerHTML = '999';
+        console.log('Set days to 999');
+    }
+    
+    // Try to initialize the timer
+    initializeCountdownTimer();
+}
+
+// Make the test function available globally
+window.testCountdownTimer = testCountdownTimer;
