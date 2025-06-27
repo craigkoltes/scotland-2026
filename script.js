@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded', function() {
     initializeNavigation();
     initializeCardInteractions();
     initializeWeatherWidgets();
+    initializeCountdownTimer();
 });
 
 // Initialize the interactive map
@@ -473,4 +474,59 @@ function displayWeatherData(widget, data) {
 // Show weather error
 function showWeatherError(widget, message) {
     widget.innerHTML = `<div class="weather-error">${message}</div>`;
+}
+
+// Initialize countdown timer
+function initializeCountdownTimer() {
+    // Set the target date: May 20, 2026 at 9:00 AM (assuming arrival time)
+    const targetDate = new Date('May 20, 2026 09:00:00').getTime();
+    
+    // Update the countdown every second
+    const countdownInterval = setInterval(function() {
+        const now = new Date().getTime();
+        const distance = targetDate - now;
+        
+        // If the countdown is finished
+        if (distance < 0) {
+            clearInterval(countdownInterval);
+            document.getElementById('days').innerHTML = '0';
+            document.getElementById('hours').innerHTML = '0';
+            document.getElementById('minutes').innerHTML = '0';
+            document.getElementById('seconds').innerHTML = '0';
+            return;
+        }
+        
+        // Calculate time units
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+        
+        // Update the display
+        document.getElementById('days').innerHTML = days;
+        document.getElementById('hours').innerHTML = hours.toString().padStart(2, '0');
+        document.getElementById('minutes').innerHTML = minutes.toString().padStart(2, '0');
+        document.getElementById('seconds').innerHTML = seconds.toString().padStart(2, '0');
+        
+        // Add animation when numbers change
+        animateCountdownNumber('days', days);
+        animateCountdownNumber('hours', hours);
+        animateCountdownNumber('minutes', minutes);
+        animateCountdownNumber('seconds', seconds);
+        
+    }, 1000);
+}
+
+// Animate countdown number changes
+function animateCountdownNumber(elementId, newValue) {
+    const element = document.getElementById(elementId);
+    if (element.dataset.lastValue !== newValue.toString()) {
+        element.style.transform = 'scale(1.2)';
+        element.style.color = '#ffd700';
+        setTimeout(() => {
+            element.style.transform = 'scale(1)';
+            element.style.color = 'white';
+        }, 200);
+        element.dataset.lastValue = newValue.toString();
+    }
 }
