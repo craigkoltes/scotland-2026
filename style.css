@@ -738,4 +738,28 @@ footer {
     }
 }
 
+@media (max-width: 600px) {
+    .timeline-table-wrapper {
+        margin-top: 1rem;
+        width: 100%;
+        overflow-x: auto;
+    }
+    .timeline-table {
+        min-width: unset;
+        width: 100%;
+        font-size: 0.9rem;
+        table-layout: auto;
+    }
+    .timeline-table th, .timeline-table td {
+        padding: 0.4rem 0.4rem;
+        font-size: 0.9rem;
+    }
+    .timeline-table th:first-child, .timeline-table td:first-child {
+        min-width: 80px;
+        font-size: 0.9rem;
+        white-space: normal;
+        word-break: break-word;
+    }
+}
+
 /* No currency converter styles needed */
