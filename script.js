@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', function() {
     initializeMap();
     initializeNavigation();
     initializeCardInteractions();
+    initializeWeatherWidgets();
 });
 
 // Initialize the interactive map
@@ -392,3 +393,78 @@ window.addEventListener('load', function() {
         }, index * 200);
     });
 });
+
+// Initialize weather widgets for timeline destinations
+function initializeWeatherWidgets() {
+    const weatherWidgets = document.querySelectorAll('.weather-widget');
+    
+    weatherWidgets.forEach(widget => {
+        const location = widget.getAttribute('data-location');
+        fetchWeatherData(location, widget);
+    });
+}
+
+// Fetch weather data for a location
+async function fetchWeatherData(location, widget) {
+    const locationCoords = {
+        'edinburgh': { lat: 55.9533, lon: -3.1883 },
+        'st-andrews': { lat: 56.3398, lon: -2.7967 },
+        'inverness': { lat: 57.4778, lon: -4.2247 },
+        'isle-of-skye': { lat: 57.5359, lon: -6.2263 },
+        'oban': { lat: 56.4154, lon: -5.4719 },
+        'kilmarnock': { lat: 55.6117, lon: -4.5019 }
+    };
+    
+    const coords = locationCoords[location];
+    if (!coords) {
+        showWeatherError(widget, 'Location not found');
+        return;
+    }
+    
+    try {
+        // Using OpenWeatherMap API (free tier)
+        const apiKey = 'demo'; // You can get a free API key from openweathermap.org
+        const url = `https://api.openweathermap.org/data/2.5/weather?lat=${coords.lat}&lon=${coords.lon}&appid=${apiKey}&units=metric`;
+        
+        // For demo purposes, we'll use mock data since we don't have an API key
+        // In production, you would use the actual API call above
+        const mockWeatherData = getMockWeatherData(location);
+        displayWeatherData(widget, mockWeatherData);
+        
+    } catch (error) {
+        console.error('Error fetching weather:', error);
+        showWeatherError(widget, 'Weather unavailable');
+    }
+}
+
+// Get mock weather data for demo purposes
+function getMockWeatherData(location) {
+    const weatherData = {
+        'edinburgh': { temp: 12, description: 'Partly Cloudy', icon: '⛅' },
+        'st-andrews': { temp: 11, description: 'Light Rain', icon: '🌧️' },
+        'inverness': { temp: 9, description: 'Misty', icon: '🌫️' },
+        'isle-of-skye': { temp: 8, description: 'Cloudy', icon: '☁️' },
+        'oban': { temp: 10, description: 'Partly Cloudy', icon: '⛅' },
+        'kilmarnock': { temp: 11, description: 'Sunny', icon: '☀️' }
+    };
+    
+    return weatherData[location] || { temp: 10, description: 'Variable', icon: '🌤️' };
+}
+
+// Display weather data in the widget
+function displayWeatherData(widget, data) {
+    widget.innerHTML = `
+        <div class="weather-content">
+            <div class="weather-icon">${data.icon}</div>
+            <div class="weather-info">
+                <div class="weather-temp">${data.temp}°C</div>
+                <div class="weather-desc">${data.description}</div>
+            </div>
+        </div>
+    `;
+}
+
+// Show weather error
+function showWeatherError(widget, message) {
+    widget.innerHTML = `<div class="weather-error">${message}</div>`;
+}
