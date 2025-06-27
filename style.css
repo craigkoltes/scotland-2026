@@ -78,8 +78,8 @@ h3 {
 .countdown-timer {
     display: flex;
     justify-content: center;
-    gap: 2rem;
-    margin-top: 2rem;
+    gap: 0.75rem;
+    margin-top: 1rem;
     flex-wrap: wrap;
 }
 
@@ -87,34 +87,35 @@ h3 {
     text-align: center;
     background: rgba(255, 255, 255, 0.15);
     backdrop-filter: blur(10px);
-    border-radius: 15px;
-    padding: 1.5rem 1rem;
+    border-radius: 12px;
+    padding: 0.75rem 0.5rem;
     border: 1px solid rgba(255, 255, 255, 0.2);
-    min-width: 80px;
+    min-width: 50px;
+    min-width: 60px;
     transition: transform 0.3s ease;
 }
 
 .countdown-item:hover {
-    transform: translateY(-5px);
+    transform: translateY(-3px);
     background: rgba(255, 255, 255, 0.2);
 }
 
 .countdown-number {
     display: block;
-    font-size: 2.5rem;
+    font-size: 1.8rem;
     font-weight: 700;
     color: white;
     font-family: 'Playfair Display', serif;
     line-height: 1;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.25rem;
 }
 
 .countdown-label {
     display: block;
-    font-size: 0.9rem;
+    font-size: 0.75rem;
     color: rgba(255, 255, 255, 0.9);
     text-transform: uppercase;
-    letter-spacing: 1px;
+    letter-spacing: 0.5px;
     font-weight: 500;
 }
 
@@ -250,19 +251,40 @@ h3 {
 
 /* Weather Widget Styling */
 .weather-widget {
-    margin-top: 1rem;
-    padding: 0.75rem;
-    background: rgba(255, 255, 255, 0.15);
-    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(10px);
+    border-radius: 8px;
+    padding: 0.5rem;
+    margin-top: 0.5rem;
     border: 1px solid rgba(255, 255, 255, 0.2);
+    font-size: 0.8rem;
+    max-width: 200px;
+}
+
+.weather-widget .temperature {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #fff;
+    margin-bottom: 0.25rem;
+}
+
+.weather-widget .description {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.75rem;
+    margin-bottom: 0.25rem;
+}
+
+.weather-widget .details {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.7rem;
+    color: rgba(255, 255, 255, 0.7);
 }
 
 .weather-loading {
-    color: rgba(255, 255, 255, 0.8);
-    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.75rem;
     text-align: center;
-    font-style: italic;
 }
 
 .weather-content {
