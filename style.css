@@ -478,6 +478,27 @@ h3 {
     font-weight: 500;
 }
 
+.more-details-link {
+    display: inline-block;
+    margin-top: 1rem;
+    color: #667eea;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+    padding: 0.5rem 1rem;
+    border: 2px solid #667eea;
+    border-radius: 25px;
+    transition: all 0.3s ease;
+    background: transparent;
+}
+
+.more-details-link:hover {
+    background: #667eea;
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+}
+
 .dark-mode .destinations-section {
     background: #232526;
 }
@@ -494,6 +515,17 @@ h3 {
 .dark-mode .highlight {
     background: #333;
     color: #ffd700;
+}
+
+.dark-mode .more-details-link {
+    color: #ffd700;
+    border-color: #ffd700;
+}
+
+.dark-mode .more-details-link:hover {
+    background: #ffd700;
+    color: #232526;
+    box-shadow: 0 5px 15px rgba(255, 215, 0, 0.3);
 }
 
 /* Gallery Section */

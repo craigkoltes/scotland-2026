@@ -641,6 +641,9 @@ function testCountdownTimer() {
 // Make the test function available globally
 window.testCountdownTimer = testCountdownTimer;
 
+// Make showLocationDetails available globally
+window.showLocationDetails = showLocationDetails;
+
 // Hamburger menu functionality
 function initializeHamburgerMenu() {
     const hamburger = document.getElementById('hamburger-menu');
